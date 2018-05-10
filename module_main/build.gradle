@@ -1,0 +1,28 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+//apply plugin: 'android-aspectjx'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.app.versionCode
+        versionName rootProject.ext.app.versionName
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    annotationProcessor rootProject.ext.dependencies.butterknife_compiler
+    annotationProcessor rootProject.ext.dependencies.arouter_compiler
+    compile project(':lib_common')
+    compile project(':lib_widget')
+}
